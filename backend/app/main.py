@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 
+from app.api.routes.auth import router as auth_router
 from app.db.base import Base
+from app.db.models import AnalysisResult, ReadingSession, User
 from app.db.session import engine
-from app.db.models import User, ReadingSession, AnalysisResult
 
 app = FastAPI(title="ReadScope API")
 
@@ -15,3 +16,6 @@ def on_startup():
 @app.get("/")
 def read_root():
     return {"message": "ReadScope backend is running"}
+
+
+app.include_router(auth_router)
