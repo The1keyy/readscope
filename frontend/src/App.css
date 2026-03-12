@@ -112,9 +112,15 @@
 
 .rs-main {
   flex: 1;
-  padding: 1.5rem 2rem 2.5rem;
+  padding: 1.75rem 2rem 2.5rem;
   max-width: 1120px;
   margin: 0 auto;
+}
+
+.rs-dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .rs-page {
@@ -508,7 +514,6 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1.5rem;
-  background: radial-gradient(circle at top, #eff6ff, #f9fafb 55%);
 }
 
 .rs-auth-panel {
@@ -545,6 +550,59 @@
   font-size: 0.85rem;
   color: #6b7280;
   text-align: center;
+}
+
+.rs-auth-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  background: radial-gradient(circle at top left, #eff6ff, #f9fafb 60%);
+}
+
+.rs-auth-hero {
+  padding: 3rem 3rem 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
+  color: #111827;
+}
+
+.rs-auth-hero-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background-color: #e0edff;
+  color: #1d4ed8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.rs-auth-hero-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.rs-auth-hero-body {
+  margin: 0;
+  max-width: 32rem;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.rs-auth-hero-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: #374151;
 }
 
 .rs-fullscreen-center {
@@ -664,6 +722,14 @@
 
   .rs-analysis-summary {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rs-auth-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rs-auth-hero {
+    display: none;
   }
 }
 

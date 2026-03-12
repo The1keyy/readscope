@@ -53,14 +53,15 @@ export function DashboardPage() {
   const hasSessions = sessions.length > 0;
 
   return (
-    <div className="rs-grid rs-grid--dashboard">
-      <section className="rs-card rs-card--elevated">
-        <h2 className="rs-section-title">Welcome, {user?.name}</h2>
-        <p className="rs-text-muted">
-          Create a reading session, record a transcript, and let ReadScope highlight where things are going well and
-          where practice will help most.
-        </p>
-
+    <div className="rs-dashboard-page">
+      <section className="rs-card rs-card--elevated rs-dashboard-hero">
+        <div>
+          <p className="rs-label">Dashboard</p>
+          <h1 className="rs-dashboard-title">Welcome back, {user?.name}</h1>
+          <p className="rs-text-muted">
+            Create reading sessions, run analysis, and track how fluency and comprehension grow over time.
+          </p>
+        </div>
         <div className="rs-dashboard-actions">
           <Link
             to="/sessions/new"
@@ -70,97 +71,101 @@ export function DashboardPage() {
           </Link>
           {hasSessions && (
             <Link
-              to={`/sessions/${sessions[0].id}`}
+              to={`/sessions[0].id}`}
               className="rs-button rs-button--ghost"
             >
-              Open most recent session
+              Open most recent
             </Link>
           )}
         </div>
       </section>
 
-      <section className="rs-card rs-card--elevated">
-        <div className="rs-section-header">
-          <h3 className="rs-section-title">Recent sessions</h3>
-          <span className="rs-badge">{sessions.length}</span>
-        </div>
+      <div className="rs-grid rs-grid--dashboard">
+        <section className="rs-card rs-card--elevated">
+          <div className="rs-section-header">
+            <h3 className="rs-section-title">Recent sessions</h3>
+            <span className="rs-badge">{sessions.length}</span>
+          </div>
 
-        {loading && <p className="rs-text-muted">Loading your sessions…</p>}
+          {loading && <p className="rs-text-muted">Loading your sessions…</p>}
 
-        {!loading && !hasSessions && (
-          <p className="rs-text-muted">You haven&apos;t created any reading sessions yet. Start with a new passage.</p>
-        )}
+          {!loading && !hasSessions && (
+            <p className="rs-text-muted">
+              You haven&apos;t created any reading sessions yet. Start with a new passage to see your first results.
+            </p>
+          )}
 
-        {!loading && hasSessions && (
-          <ul className="rs-session-list">
-            {sessions.slice(0, 5).map((session) => (
-              <li
-                key={session.id}
-                className="rs-session-list-item"
-              >
-                <div>
+          {!loading && hasSessions && (
+            <ul className="rs-session-list">
+              {sessions.slice(0, 5).map((session) => (
+                <li
+                  key={session.id}
+                  className="rs-session-list-item"
+                >
+                  <div>
+                    <Link
+                      to={`/sessions/${session.id}`}
+                      className="rs-session-title"
+                    >
+                      {session.title}
+                    </Link>
+                    <div className="rs-session-meta">
+                      <span>{session.language}</span>
+                      <span>•</span>
+                      <span>{session.difficulty}</span>
+                    </div>
+                  </div>
                   <Link
                     to={`/sessions/${session.id}`}
-                    className="rs-session-title"
+                    className="rs-link"
                   >
-                    {session.title}
+                    View
                   </Link>
-                  <div className="rs-session-meta">
-                    <span>{session.language}</span>
-                    <span>•</span>
-                    <span>{session.difficulty}</span>
-                  </div>
-                </div>
-                <Link
-                  to={`/sessions/${session.id}`}
-                  className="rs-link"
-                >
-                  View
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
 
-      <section className="rs-card rs-card--elevated rs-card--full-width">
-        <div className="rs-section-header">
-          <h3 className="rs-section-title">Latest analysis</h3>
-        </div>
-
-        {!latestAnalysis && (
-          <p className="rs-text-muted">
-            Once you run an analysis on a session, scores and feedback will show up here.
-          </p>
-        )}
-
-        {latestAnalysis && (
-          <div className="rs-analysis-summary">
-            <div className="rs-analysis-summary-main">
-              <p className="rs-label">Accuracy score</p>
-              <p className="rs-score-large">{latestAnalysis.result.accuracy_score.toFixed(1)}%</p>
-              <p className="rs-text-muted">
-                Session: <span className="rs-highlight">{latestAnalysis.session.title}</span>
-              </p>
-            </div>
-            <div className="rs-analysis-summary-metrics">
-              <div>
-                <p className="rs-label">Fluency</p>
-                <p className="rs-score-medium">{latestAnalysis.result.fluency_score.toFixed(1)}%</p>
-              </div>
-              <div>
-                <p className="rs-label">Comprehension</p>
-                <p className="rs-score-medium">{latestAnalysis.result.comprehension_score.toFixed(1)}%</p>
-              </div>
-              <div>
-                <p className="rs-label">Words</p>
-                <p className="rs-score-medium">{latestAnalysis.result.word_count}</p>
-              </div>
-            </div>
-            <p className="rs-analysis-feedback">{latestAnalysis.result.feedback_summary}</p>
+        <section className="rs-card rs-card--elevated">
+          <div className="rs-section-header">
+            <h3 className="rs-section-title">Latest analysis</h3>
           </div>
-        )}
-      </section>
+
+          {!latestAnalysis && (
+            <p className="rs-text-muted">
+              Once you run an analysis on a session, scores and feedback will show up here.
+            </p>
+          )}
+
+          {latestAnalysis && (
+            <div className="rs-analysis-summary">
+              <div className="rs-analysis-summary-main">
+                <p className="rs-label">Accuracy score</p>
+                <p className="rs-score-large">{latestAnalysis.result.accuracy_score.toFixed(1)}%</p>
+                <p className="rs-text-muted">
+                  Session: <span className="rs-highlight">{latestAnalysis.session.title}</span>
+                </p>
+              </div>
+              <div className="rs-analysis-summary-metrics">
+                <div>
+                  <p className="rs-label">Fluency</p>
+                  <p className="rs-score-medium">{latestAnalysis.result.fluency_score.toFixed(1)}%</p>
+                </div>
+                <div>
+                  <p className="rs-label">Comprehension</p>
+                  <p className="rs-score-medium">{latestAnalysis.result.comprehension_score.toFixed(1)}%</p>
+                </div>
+                <div>
+                  <p className="rs-label">Words</p>
+                  <p className="rs-score-medium">{latestAnalysis.result.word_count}</p>
+                </div>
+              </div>
+              <p className="rs-analysis-feedback">{latestAnalysis.result.feedback_summary}</p>
+            </div>
+          )}
+        </section>
+      </div>
     </div>
   );
 }
