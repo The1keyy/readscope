@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 
+from app.api.routes.analysis import router as analysis_router
 from app.api.routes.auth import router as auth_router
+from app.api.routes.sessions import router as sessions_router
 from app.db.base import Base
 from app.db.models import AnalysisResult, ReadingSession, User
 from app.db.session import engine
@@ -19,3 +21,5 @@ def read_root():
 
 
 app.include_router(auth_router)
+app.include_router(sessions_router)
+app.include_router(analysis_router)
