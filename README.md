@@ -34,7 +34,7 @@ ReadScope takes what a user was *supposed* to read and compares it to what they 
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/readscope.git
+git clone https://github.com/The1keyy/readscope.git
 cd readscope
 ```
 
